@@ -10,8 +10,9 @@ const int screenWidth = 800;
 const int screenHeight = 800;
 
 int main() {
-    InitWindow(screenWidth, screenHeight, "Base Raylib");
+    InitWindow(screenWidth, screenHeight, "Arcade Game");
     SetTargetFPS(60);
+    ToggleFullscreen();
 
     while (!WindowShouldClose()) {
         
