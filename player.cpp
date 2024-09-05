@@ -7,8 +7,13 @@ public:
     Rectangle rect = { pos.x, pos.y, 20, 30 };
     Vector2 vel{ 0, 0 };
 
+
+    float speed = 7.0f;
+    float jumpforce = 7.0f;
+
     float speed = 5.0f;
     float jumpforce = 5.0f;
+
     float gravity = 0.5f;
 
     void move() {
@@ -23,12 +28,27 @@ public:
             vel.x = 0; // Stop when no key is pressed
         }
 
+        // Jump/Gravity
+        if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)){
+            vel.y = -jumpforce; // Apply jump when you press space or up arrow
+        }
+        else{
+            vel.y += gravity; // Apply Gravity
+
+        }
+
         // Update position based on velocity
         pos.x += vel.x;
+        pos.y += vel.y;
+
 
         // Keep player within screen bounds
         if (pos.x < 0) pos.x = 0;
         if (pos.x > GetScreenWidth() - rect.width) pos.x = GetScreenWidth() - rect.width;
+
+        if (pos.y < 0) pos.y = 0;
+        if (pos.y > GetScreenHeight() - rect.height) pos.y = GetScreenHeight() - rect.height;
+
     }
 
     void update() {
