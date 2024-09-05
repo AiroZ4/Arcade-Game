@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include <stdio.h>
+#include <iostream>
 
 class player {
 public:
@@ -10,7 +10,8 @@ public:
 
     float speed = 7.0f;
     float jumpforce = 7.0f;
-
+    float dashforce = 100.0f;
+    int dashcounter = 0;
     float gravity = 0.5f;
 
     void move() {
@@ -25,9 +26,23 @@ public:
             vel.x = 0; // Stop when no key is pressed
         }
 
+        // Dash 
+        if (IsKeyDown(KEY_SPACE) && dashcounter == 1){
+            if (vel.x <= -0.1f){
+                vel.x = -dashforce;
+                vel.y = 0;
+                dashcounter = 0;
+            }
+            else if (vel.x >= 0.1f){
+                vel.x = dashforce;
+                vel.y = 0;
+                dashcounter = 0;
+            }
+        }
+
         // Jump/Gravity
-        if (IsKeyDown(KEY_SPACE) || IsKeyDown(KEY_UP)){
-            vel.y = -jumpforce; // Apply jump when you press space or up arrow
+        if (IsKeyDown(KEY_C)){
+            vel.y = -jumpforce; // Apply jump when you press C
         }
         else{
             vel.y += gravity; // Apply Gravity
@@ -44,7 +59,10 @@ public:
         if (pos.x > GetScreenWidth() - rect.width) pos.x = GetScreenWidth() - rect.width;
 
         if (pos.y < 0) pos.y = 0;
-        if (pos.y > GetScreenHeight() - rect.height) pos.y = GetScreenHeight() - rect.height;
+        if (pos.y > GetScreenHeight() - rect.height){
+            pos.y = GetScreenHeight() - rect.height;
+            
+        }
 
     }
 
@@ -55,6 +73,7 @@ public:
         // Update rectangle position to match the player's position
         rect.x = pos.x;
         rect.y = pos.y;
+        std::cout << dashcounter;
 
         // Draw the player rectangle
         DrawRectangleRec(rect, WHITE);
