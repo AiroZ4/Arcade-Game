@@ -13,6 +13,7 @@ public:
     float dashforce = 100.0f;
     int dashcounter = 0;
     float gravity = 0.5f;
+    bool grounded = false;
 
     void move() {
         // Update velocity based on input
@@ -41,8 +42,9 @@ public:
         }
 
         // Jump/Gravity
-        if (IsKeyDown(KEY_C)){
+        if (IsKeyDown(KEY_C) && grounded){
             vel.y = -jumpforce; // Apply jump when you press C
+            grounded = false;
         }
         else{
             vel.y += gravity; // Apply Gravity
@@ -61,7 +63,7 @@ public:
         if (pos.y < 0) pos.y = 0;
         if (pos.y > GetScreenHeight() - rect.height){
             pos.y = GetScreenHeight() - rect.height;
-            
+            grounded = true;  
         }
 
     }
@@ -73,7 +75,7 @@ public:
         // Update rectangle position to match the player's position
         rect.x = pos.x;
         rect.y = pos.y;
-        std::cout << dashcounter;
+        // std::cout << dashcounter;
 
         // Draw the player rectangle
         DrawRectangleRec(rect, WHITE);
