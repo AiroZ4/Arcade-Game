@@ -11,17 +11,14 @@ public:
     float speed = 7.0f;
     float jumpforce = 7.0f;
 
-    float speed = 5.0f;
-    float jumpforce = 5.0f;
-
     float gravity = 0.5f;
 
     void move() {
         // Update velocity based on input
-        if (IsKeyDown(KEY_A)) {
+        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
             vel.x = -speed; // Moving left
         } 
-        else if (IsKeyDown(KEY_D)) {
+        else if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
             vel.x = speed; // Moving right
         } 
         else {

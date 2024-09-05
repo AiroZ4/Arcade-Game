@@ -16,7 +16,7 @@ player p;
 int main() {
     InitWindow(screenWidth, screenHeight, "Arcade Game");
     SetTargetFPS(60);
-  //ToggleFullscreen();
+    //ToggleFullscreen();
 
     while (!WindowShouldClose()) {
         
