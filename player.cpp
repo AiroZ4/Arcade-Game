@@ -9,7 +9,7 @@ public:
     Vector2 vel{ 0, 0 };
 
     float speed = 7.0f;              
-    float accel = 0.75f;              
+    float accel = 1.0f;              
     float decelGrounded = 0.8f;      
     float decelAir = 0.3f;           
     float jumpforce = 10.0f;

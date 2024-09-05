@@ -23,7 +23,8 @@ int main() {
     // Create some blocks
     blocks.push_back(Block{ {200, 750}, {200, 750, 100, 15} });
     blocks.push_back(Block{ {400, 700}, {400, 700, 100, 15} });
-    blocks.push_back(Block{ {300, 400}, {300, 600, 100, 15} });
+    blocks.push_back(Block{ {300, 600}, {300, 600, 100, 15} });
+    
 
     while (!WindowShouldClose()) {
         // Gather all block rectangles for collision checking
