@@ -6,6 +6,7 @@
 #include <cmath>
 #include <string>
 #include <player.cpp>
+#include <iostream>
 
 const int screenWidth = 800;
 const int screenHeight = 800;
@@ -15,7 +16,7 @@ player p;
 int main() {
     InitWindow(screenWidth, screenHeight, "Arcade Game");
     SetTargetFPS(60);
-    //ToggleFullscreen();
+  //ToggleFullscreen();
 
     while (!WindowShouldClose()) {
         
@@ -23,6 +24,7 @@ int main() {
         BeginDrawing();
         ClearBackground(BLACK);
         p.update();
+        
 
         EndDrawing();
     }
