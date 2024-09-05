@@ -6,12 +6,14 @@
 #include <cmath>
 #include <string>
 #include <player.cpp>
+#include <blocks.cpp>
 #include <iostream>
 
 const int screenWidth = 800;
 const int screenHeight = 800;
 
 player p;
+block b1;
 
 int main() {
     InitWindow(screenWidth, screenHeight, "Arcade Game");
@@ -24,6 +26,7 @@ int main() {
         BeginDrawing();
         ClearBackground(BLACK);
         p.update();
+        b1.draw();
         
 
         EndDrawing();
