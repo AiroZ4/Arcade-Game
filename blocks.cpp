@@ -1,12 +1,18 @@
+// blocks.cpp
 #include "raylib.h"
 
-class block{
-    public:
-        Vector2 pos = { 100, 600 };
-        Rectangle rect = { pos.x, pos.y, 100, 10};
+class Block {
+public:
+    Vector2 pos = { 100, 600 };
+    Rectangle rect = { pos.x, pos.y, 100, 10 };
 
-        void draw(){
-            DrawRectangleRec(rect, WHITE);
-        }
-    
+    // Method to draw the block
+    void draw() {
+        DrawRectangleRec(rect, WHITE);
+    }
+
+    // Method to get the block's rectangle for collision checks (const member function)
+    Rectangle getRect() const {
+        return rect;
+    }
 };

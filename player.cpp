@@ -1,7 +1,8 @@
 #include "raylib.h"
+#include <vector>
 #include <iostream>
 
-class player {
+class Player {
 public:
     Vector2 pos{ 100, 100 };
     Rectangle rect = { pos.x, pos.y, 20, 30 };
@@ -62,15 +63,43 @@ public:
         }
     }
 
-    void update() {
-        // Handle input and movement
+    // Modify the update method in player.cpp to handle collisions from all sides
+    void update(const std::vector<Rectangle>& obstacles) {
         move();
 
         // Update rectangle position to match the player's position
         rect.x = pos.x;
         rect.y = pos.y;
 
-        // Draw the player rectangle
+        // Check collision with each obstacle in the list
+        for (const auto& obstacle : obstacles) {
+            if (CheckCollisionRecs(rect, obstacle)) {
+                // Handle collision on the top side
+                if (vel.y > 0 && rect.y + rect.height <= obstacle.y + vel.y) {
+                    pos.y = obstacle.y - rect.height;
+                    vel.y = 0;
+                    grounded = true;
+                }
+                // Handle collision on the bottom side
+                else if (vel.y < 0 && rect.y >= obstacle.y + obstacle.height + vel.y) {
+                    pos.y = obstacle.y + obstacle.height;
+                    vel.y = 0;
+                }
+                // Handle collision on the right side
+                else if (vel.x < 0 && rect.x >= obstacle.x + obstacle.width + vel.x) {
+                    pos.x = obstacle.x + obstacle.width;
+                    vel.x = 0;
+                }
+                // Handle collision on the left side
+                else if (vel.x > 0 && rect.x + rect.width <= obstacle.x + vel.x) {
+                    pos.x = obstacle.x - rect.width;
+                    vel.x = 0;
+                }
+            }
+        }
+
+        // Draw the player
         DrawRectangleRec(rect, WHITE);
     }
+
 };
