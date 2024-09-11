@@ -1,4 +1,3 @@
-// blocks.cpp
 #include "raylib.h"
 
 class Block {
@@ -16,3 +15,14 @@ public:
         return rect;
     }
 };
+class End_Level{
+public:
+    Vector2 pos = { 600,200 };
+    Rectangle rect = { pos.x, pos.y, 10, 10 };
+
+    // Method to draw the block
+    void draw() {
+        DrawRectangleRec(rect, GREEN);
+    }
+};
+

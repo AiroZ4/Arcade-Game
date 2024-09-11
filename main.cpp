@@ -1,4 +1,3 @@
-// main.cpp changes
 #include "raylib.h"
 #include "raymath.h"
 #include <vector>
@@ -13,10 +12,11 @@
 const int screenWidth = 800;
 const int screenHeight = 800;
 int current_level = 0;
+bool reset_level = true;
 
 
 Player p;
-std::vector<Block> blocks;  // Vector to hold multiple blocks
+std::vector<Block> Level_3;
 std::vector<Block> level_1;
 std::vector<Block> level_2;
 
@@ -25,15 +25,25 @@ int main() {
     SetTargetFPS(60);
 
     // Level 1 Data
-    level_1.push_back(Block{ {155, 223}, {155, 223, 84, 42} });
-    level_1.push_back(Block{ {306, 182}, {306, 182, 66, 24} });
-    level_1.push_back(Block{ {307, 264}, {307, 264, 77, 28} });
+    level_1.push_back(Block{ {16, 157}, {16, 157, 38, 541} });
+    level_1.push_back(Block{ {21, 659}, {21, 659, 616, 39} });
+    level_1.push_back(Block{ {99, 166}, {99, 166, 30, 418} });
+    level_1.push_back(Block{ {101, 547}, {101, 547, 415, 38} });
+    level_1.push_back(Block{ {595, 487}, {595, 487, 40, 210} });
+    level_1.push_back(Block{ {580, 599}, {580, 599, 18, 12} });
+    level_1.push_back(Block{ {511, 562}, {511, 562, 18, 11} });
+    level_1.push_back(Block{ {240, 400}, {240, 400, 394, 97} });
+
+    
+
 
     // Level 2 Data
     level_2.push_back(Block{ {107, 401}, {107, 401, 117, 24} });
     level_2.push_back(Block{ {291, 371}, {291, 371, 49, 10} });
     level_2.push_back(Block{ {239, 310}, {239, 310, 19, 31} });
     level_2.push_back(Block{ {338, 275}, {338, 275, 196, 17} });
+
+    // Level 3 Data
     
 
     while (!WindowShouldClose()) {
@@ -43,10 +53,22 @@ int main() {
             for (const auto& block : level_1) {
                 blockRects.push_back(block.getRect());
             }
+            End_Level el1;
+            el1.draw();
         }
         else if (current_level == 1){
             for (const auto& block : level_2) {
                 blockRects.push_back(block.getRect());
+            }
+        }
+        if (reset_level == true){
+            if (current_level == 0){
+                p.pos = {65,200};
+                reset_level = false;
+            }
+            else if (current_level == 1){
+                p.pos = {200,100};
+                reset_level = false;
             }
         }
         
