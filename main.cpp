@@ -16,9 +16,19 @@ bool reset_level = true;
 
 
 Player p;
+Rectangle el1 = {170, 510, 20, 20};
 std::vector<Block> Level_3;
 std::vector<Block> level_1;
 std::vector<Block> level_2;
+
+void check_end_level(){
+    bool collision = CheckCollisionRecs(el1, p.rect);
+    if (collision){
+        p.vel = {0,0};
+        current_level += 1;
+        reset_level = true;
+    }
+}
 
 int main() {
     InitWindow(screenWidth, screenHeight, "Arcade Game");
@@ -53,8 +63,8 @@ int main() {
             for (const auto& block : level_1) {
                 blockRects.push_back(block.getRect());
             }
-            End_Level el1;
-            el1.draw();
+            
+            DrawRectangleRec(el1, DARKBLUE);
         }
         else if (current_level == 1){
             for (const auto& block : level_2) {
@@ -78,6 +88,7 @@ int main() {
 
         // Update player and check for collisions with all blocks
         p.update(blockRects);
+        check_end_level();
 
         // Draw the level depending on the current_level
         if (current_level == 0){
@@ -98,3 +109,4 @@ int main() {
     CloseWindow();
     return 0;
 }
+

@@ -17,7 +17,7 @@ public:
 };
 class End_Level{
 public:
-    Vector2 pos = { 600,200 };
+    Vector2 pos = { 500,600 };
     Rectangle rect = { pos.x, pos.y, 10, 10 };
 
     // Method to draw the block
